@@ -1,0 +1,32 @@
+groups:
+  - name: churn_model_alerts
+    rules:
+      # Drift: PSI alto en alguna feature numérica.
+      - alert: FeatureDriftDetected
+        expr: feature_drift_psi > 0.25
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Data drift detectado en {{ $labels.feature }}"
+          description: "El PSI de {{ $labels.feature }} supera 0.25 (posible reentrenamiento)."
+
+      # La tasa de churn predicha se dispara.
+      - alert: HighChurnRate
+        expr: rate(churn_positive_total[10m]) / rate(churn_predictions_total[10m]) > 0.6
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Tasa de churn predicha muy alta"
+          description: "Más del 60% de las predicciones recientes son churn=1."
+
+      # Morosidad promedio elevada (métrica de negocio de la clase).
+      - alert: HighAveragePaymentDelay
+        expr: feature_mean{feature="payment_delay"} > 30
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Morosidad promedio elevada"
+          description: "payment_delay promedio supera los 30 días."

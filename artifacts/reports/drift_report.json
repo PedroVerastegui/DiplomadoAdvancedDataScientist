@@ -1,0 +1,50 @@
+{
+  "tenure_months": {
+    "psi": 0.0095,
+    "status": "estable",
+    "baseline_mean": 36.08,
+    "current_mean": 36.46,
+    "pct_change": 1.0
+  },
+  "monthly_fee": {
+    "psi": 1.6488,
+    "status": "drift",
+    "baseline_mean": 70.51,
+    "current_mean": 117.65,
+    "pct_change": 66.9
+  },
+  "total_charges": {
+    "psi": 0.4475,
+    "status": "drift",
+    "baseline_mean": 2552.2,
+    "current_mean": 4294.61,
+    "pct_change": 68.3
+  },
+  "support_calls": {
+    "psi": 5.7338,
+    "status": "drift",
+    "baseline_mean": 2.0,
+    "current_mean": 7.99,
+    "pct_change": 300.1
+  },
+  "payment_delay": {
+    "psi": 2.7538,
+    "status": "drift",
+    "baseline_mean": 4.99,
+    "current_mean": 51.66,
+    "pct_change": 934.5
+  },
+  "digital_usage": {
+    "psi": 9.9309,
+    "status": "drift",
+    "baseline_mean": 55.54,
+    "current_mean": 21.31,
+    "pct_change": -61.6
+  },
+  "churn_probability": {
+    "baseline_mean": 0.308,
+    "current_mean": 0.5456,
+    "pct_change": 77.2,
+    "status": "drift"
+  }
+}
