@@ -1,0 +1,19 @@
+stages:
+  make_data:
+    cmd: python main.py make-data --n 4000
+    deps:
+      - src/data.py
+    outs:
+      - data/raw/customer_churn.csv
+
+  train:
+    cmd: python main.py train
+    deps:
+      - data/raw/customer_churn.csv
+      - src/model.py
+      - src/features.py
+    outs:
+      - artifacts/models/churn_pipeline.joblib
+    metrics:
+      - artifacts/reports/metrics.json:
+          cache: false

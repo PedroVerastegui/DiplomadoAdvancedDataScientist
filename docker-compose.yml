@@ -1,0 +1,23 @@
+services:
+  # Servicio del modelo: expone /predict y /metrics (Prometheus).
+  model-api:
+    build: .
+    container_name: churn-model-api
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # Prometheus: recolecta las métricas del modelo y evalúa las alertas.
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    depends_on:
+      - model-api
+    restart: unless-stopped
